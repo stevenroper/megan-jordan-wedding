@@ -1,22 +1,17 @@
 import React from 'react';
-import {
-  Box,
-  Button,
-  Container,
-  Divider,
-  Flex,
-  Heading,
-  Input,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Text,
-} from '@chakra-ui/react';
+import styled from 'styled-components';
 import faker from 'faker';
 import Fuse from 'fuse.js';
+
+import {
+  Box,
+  Flex,
+  Grid,
+  Heading,
+  Input,
+  Paragraph,
+  TextButton,
+} from './components/styled';
 
 import colors from './constants/colors';
 
@@ -46,67 +41,74 @@ export const App = () => {
   };
 
   return (
-    <Box height="100vh" bgGradient={`linear(to-b, white, ${colors.ivory})`}>
-      <Container paddingTop="2rem">
+    <Flex
+      backgroundColor={colors.ivory}
+      width="100%"
+      height="100vh"
+      padding="2rem 1rem"
+      justifyContent="center"
+    >
+      <Flex flexDirection="column" width="100%" maxWidth="30rem">
         <Heading
-          as="h1"
-          size="4xl"
-          color={colors.gold}
-          fontFamily="serif"
+          fontSize="4rem"
           textAlign="center"
+          fontFamily="serif"
+          color={colors.gold}
         >
           Megan &amp; Jordan
         </Heading>
-        <Divider marginY="1rem" borderColor="rgb(200, 200, 200)" />
-        <Heading textAlign="center" marginBottom="1rem" color={colors.green}>
+        <Divider />
+        <Heading as="h2" textAlign="center" marginBottom="1rem">
           Find your table
         </Heading>
-        <Flex marginBottom="1rem">
+        <Flex>
           <Input
-            name="searchTerm"
-            value={searchTerm}
             placeholder="Start typing to find your name"
-            focusBorderColor={colors.green}
-            _placeholder={{ color: colors.green, fontWeight: '500' }}
-            marginRight="1rem"
+            type="text"
+            value={searchTerm}
             onChange={(e) => handleOnChange(e.target.value)}
+            marginRight="1rem"
             autoFocus
           />
-          <Button
-            color={colors.green}
-            _focus={{ outlineColor: colors.green }}
-            variant="link"
-            onClick={() => setSearchTerm('')}
-          >
-            Clear
-          </Button>
+          <TextButton onClick={() => setSearchTerm('')}>Clear</TextButton>
         </Flex>
-        <Box maxHeight="25rem" overflowY="scroll">
+        <Box maxHeight="25rem" overflowY="scroll" marginTop="1rem">
           {searchTerm.length >= 2 && filteredPeople.length > 0 && (
-            <Table>
-              <Thead>
-                <Tr>
-                  <Th>Name</Th>
-                  <Th>Table Number</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {filteredPeople.map(({ item: person }, index) => (
-                  <Tr key={index}>
-                    <Td>{person?.name}</Td>
-                    <Td>{person?.table}</Td>
-                  </Tr>
-                ))}
-              </Tbody>
-            </Table>
+            <>
+              <GridRow>
+                <Paragraph fontWeight="500" fontSize="0.875rem">
+                  NAME
+                </Paragraph>
+                <Paragraph fontWeight="500" fontSize="0.875rem">
+                  TABLE NUMBER
+                </Paragraph>
+              </GridRow>
+              {filteredPeople.map(({ item: person }, index) => (
+                <GridRow>
+                  <Paragraph>{person.name}</Paragraph>
+                  <Paragraph>{person.table}</Paragraph>
+                </GridRow>
+              ))}
+            </>
           )}
           {searchTerm.length >= 2 && filteredPeople.length === 0 && (
-            <Text textAlign="center">
+            <Paragraph textAlign="center">
               Hmm, we can't find your name. Try again.
-            </Text>
+            </Paragraph>
           )}
         </Box>
-      </Container>
-    </Box>
+      </Flex>
+    </Flex>
   );
 };
+
+const Divider = styled.hr`
+  border: 0;
+  border-top: 1px solid rgb(200, 200, 200);
+  margin: 1rem 0;
+`;
+
+const GridRow = styled(Grid)`
+  grid-template-columns: 2fr 1fr;
+  border-bottom: 1px solid rgb(215, 215, 215);
+`;

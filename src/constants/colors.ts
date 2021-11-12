@@ -3,7 +3,7 @@ const colors = {
   lightBlue: '#6C91C2',
   green: '#54755A',
   gold: '#B7953B',
-  ivory: '#EAF2E3',
+  ivory: '#fffff0',
 };
 
 export default colors;
