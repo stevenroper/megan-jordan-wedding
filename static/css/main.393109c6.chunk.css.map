@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/index.css"],"names":[],"mappings":"AAAA,UAEE,SAAU,CACV,QAAS,CACT,qBACF","file":"main.393109c6.chunk.css","sourcesContent":["body,\nhtml {\n  padding: 0;\n  margin: 0;\n  box-sizing: border-box;\n}\n"]}
