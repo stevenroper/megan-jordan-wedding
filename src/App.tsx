@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import faker from 'faker';
 import Fuse from 'fuse.js';
 
 import {
@@ -14,22 +13,12 @@ import {
 } from './components/styled';
 
 import colors from './constants/colors';
-
-type Person = {
-  name: string;
-  table: number;
-};
+import data from './constants/data';
 
 export const App = () => {
   const [searchTerm, setSearchTerm] = React.useState('');
-  const [people] = React.useState<Person[]>(
-    new Array(100).fill('').map(() => ({
-      name: faker.name.findName(),
-      table: Math.round(Math.random() * 12),
-    }))
-  );
   const [filteredPeople, setFilteredPeople] = React.useState<any[]>([]);
-  const fuzzySearch = new Fuse(people, {
+  const fuzzySearch = new Fuse(data, {
     distance: 50,
     minMatchCharLength: 2,
     threshold: 0.15,
@@ -86,7 +75,7 @@ export const App = () => {
               {filteredPeople.map(({ item: person }, index) => (
                 <GridRow>
                   <Paragraph>{person.name}</Paragraph>
-                  <Paragraph>{person.table}</Paragraph>
+                  <Paragraph>{person.tableNumber}</Paragraph>
                 </GridRow>
               ))}
             </>
