@@ -142,7 +142,7 @@ const data: Person[] = [
   { name: 'Adam Westover', tableNumber: 2 },
   { name: 'Bryce Westover', tableNumber: 1 },
   { name: 'Charlotte Westover', tableNumber: 12 },
-  { name: 'Christie Westover', tableNumber: 11 },
+  { name: 'Christy Westover', tableNumber: 11 },
   { name: 'Cole Westover', tableNumber: 11 },
   { name: 'Denise Westover', tableNumber: 11 },
   { name: 'Helen & Maya Westover', tableNumber: 2 },
